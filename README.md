@@ -2,58 +2,76 @@
 
 **MORPH: Integrating Multi-Scale Priors from Driver-Centric Targeted Regulation to Pathway Crosstalk for Interpretable Cancer Prognosis**
 
-MORPH is an interpretable multi-omics framework for cancer prognosis. It jointly models mRNA and miRNA expression while incorporating biological priors at complementary scales.
+MORPH integrates mRNA and miRNA expression with driver-centric regulatory priors and pathway-level associations for cancer prognosis prediction.
 
-![Overview of the MORPH framework](assets/pathduet_overview.png)
+![Overview of MORPH](assets/pathduet_overview.png)
 
-## Model overview
+## Code and datasets
 
-MORPH contains three main components:
+- **Code:** https://github.com/zppaper/MORPH
+- **Datasets:** https://zenodo.org/records/23299794
+- **Dataset DOI:** https://doi.org/10.5281/zenodo.23299794
+- **Download:** [datasets.rar](https://zenodo.org/records/23299794/files/datasets.rar)
 
-1. **Driver-centric cross-omics regulation:** models targeted interactions between selected driver mRNAs and regulatory miRNAs by combining data-driven and prior-guided attention.
-2. **Regulation-derived pathway-level associations:** projects mRNA and miRNA features into pathway representations and captures pathway crosstalk using biological knowledge.
-3. **Multi-scale feature fusion:** integrates global, micro-level, and pathway-level representations for downstream cancer prognosis tasks, including cancer stage prediction and survival analysis.
+## Directory setup
 
-## Repository contents
+Download the code and extract `datasets.rar`. Arrange the code, processed datasets, and biological priors as follows for the main classification experiments:
 
 ```text
 MORPH/
-|-- MORPH/
-|   |-- data.py                 # Multi-omics data loading and sample alignment
-|   `-- utils.py                # Reproducibility and evaluation utilities
-|-- datasets/
-|   `-- KIRC/                   # Example mRNA, miRNA, and label files
-|-- assets/
-|   `-- pathduet_overview.png   # Framework overview
-|-- 20230205_kegg_hsa.gmt       # KEGG gene-pathway annotations
-|-- kegg_anano.txt              # miRNA-pathway annotations
-|-- driver_genes_list.txt       # Driver-gene prior
-`-- requirements.txt
+├── README.md
+├── requirements.txt
+├── assets/
+├── datasets/
+│   ├── stage/
+│   │   ├── KIRC/
+│   │   ├── MESO/
+│   │   ├── STAD/
+│   │   └── THCA/
+│   ├── vital_status/
+│   │   ├── LAML/
+│   │   ├── SKCM/
+│   │   └── UVM/
+│   └── priors/
+│       ├── 20230205_kegg_hsa.gmt
+│       ├── kegg_anano.txt
+│       └── miRTarBase_MTI_processed_cleaned.csv
+└── MORPH/
+    ├── run_stage.py
+    ├── run_vital_status.py
+    ├── configs/
+    ├── morph/
+    ├── resources/
+    │   └── driver_genes_list.txt
+    ├── MORPH_ablation/
+    ├── MORPH_case_analysis/
+    ├── MORPH_data_preparation/
+    └── MORPH_survival_comparison/
 ```
 
-## Quick start
+Each cohort directory contains `mRNA.csv`, `miRNA.csv`, and `label.csv`. Place `datasets/` at the repository root, alongside the inner `MORPH/` code directory. Keep the driver-gene list in `MORPH/resources/`.
 
-Install the dependencies:
+## Run the main experiments
+
+From the repository root, install dependencies and enter the code directory:
 
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
+cd MORPH
 ```
 
-Load the example KIRC dataset:
+Cancer-stage classification on KIRC, MESO, STAD, and THCA:
 
-```python
-from MORPH.data import load_dataset
-
-mrna, mirna, labels = load_dataset("datasets", "KIRC")
-print(mrna.shape, mirna.shape, labels.shape)
+```bash
+python run_stage.py --output-dir ../results/reproduction_stage
 ```
 
-## Code availability
+Vital-status classification on LAML, SKCM, and UVM:
 
-This repository currently provides a preview of the data-processing and evaluation utilities, example data, biological annotations, and the MORPH framework overview.
+```bash
+python run_vital_status.py --output-dir ../results/reproduction_vital_status
+```
 
-**The full implementation will be publicly released on GitHub upon acceptance of this manuscript.**
+The scripts use the default configurations in `configs/` and automatically select CUDA when available, otherwise CPU. Each run saves fold metrics, seed metrics, and summary results under its output directory. Choose a new output directory when repeating an experiment.
 
-## Citation
-
-Citation information will be added upon publication.
+Additional code for ablation experiments, case analyses, TCGA/CPTAC data acquisition and preprocessing, and survival-model comparisons is provided in the corresponding subdirectories.
