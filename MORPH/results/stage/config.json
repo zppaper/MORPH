@@ -1,0 +1,24 @@
+{
+  "task": "stage",
+  "datasets": [
+    "KIRC",
+    "MESO",
+    "STAD",
+    "THCA"
+  ],
+  "seeds": [
+    1028,
+    2024,
+    3407
+  ],
+  "folds": 5,
+  "batch_size": 32,
+  "learning_rate": 0.0005,
+  "epochs": 100,
+  "patience": 15,
+  "data_root": "D:\\\u7814\u7a76\u751f\\\u8bba\u6587\u8fdb\u5c55\\\u7b2c\u4e00\u7bc7\u8c03\u63a7\u5173\u7cfbbio\\\u8fd4\u4fee\\\u5927\u4fee1\\MORPH_main\\datasets\\stage",
+  "prior_dir": "D:\\\u7814\u7a76\u751f\\\u8bba\u6587\u8fdb\u5c55\\\u7b2c\u4e00\u7bc7\u8c03\u63a7\u5173\u7cfbbio\\\u8fd4\u4fee\\\u5927\u4fee1\\MORPH_main\\datasets\\priors",
+  "driver_file": "D:\\\u7814\u7a76\u751f\\\u8bba\u6587\u8fdb\u5c55\\\u7b2c\u4e00\u7bc7\u8c03\u63a7\u5173\u7cfbbio\\\u8fd4\u4fee\\\u5927\u4fee1\\MORPH_main\\MORPH\\resources\\driver_genes_list.txt",
+  "output_dir": "D:\\\u7814\u7a76\u751f\\\u8bba\u6587\u8fdb\u5c55\\\u7b2c\u4e00\u7bc7\u8c03\u63a7\u5173\u7cfbbio\\\u8fd4\u4fee\\\u5927\u4fee1\\MORPH_main\\results\\stage",
+  "device": "cuda:0"
+}

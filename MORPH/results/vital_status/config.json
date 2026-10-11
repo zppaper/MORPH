@@ -1,0 +1,23 @@
+{
+  "task": "vital_status",
+  "datasets": [
+    "LAML",
+    "SKCM",
+    "UVM"
+  ],
+  "seeds": [
+    1028,
+    2024,
+    3407
+  ],
+  "folds": 5,
+  "batch_size": 32,
+  "learning_rate": 0.0005,
+  "epochs": 100,
+  "patience": 15,
+  "data_root": "E:\\pycharm\\python object\\zp\\bio1\\MORPH_main\\datasets\\vital_status",
+  "prior_dir": "E:\\pycharm\\python object\\zp\\bio1\\MORPH_main\\datasets\\priors",
+  "driver_file": "E:\\pycharm\\python object\\zp\\bio1\\MORPH_main\\MORPH\\resources\\driver_genes_list.txt",
+  "output_dir": "E:\\pycharm\\python object\\zp\\bio1\\MORPH_main\\results\\vital_status",
+  "device": "cuda:0"
+}

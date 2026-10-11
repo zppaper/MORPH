@@ -1,0 +1,12 @@
+task: stage
+datasets: [KIRC, MESO, STAD, THCA]
+seeds: [1028, 2024, 3407]
+folds: 5
+batch_size: 32
+learning_rate: 0.0005
+epochs: 100
+patience: 15
+data_root: ../datasets/stage
+prior_dir: ../datasets/priors
+driver_file: resources/driver_genes_list.txt
+output_dir: ../results/stage
